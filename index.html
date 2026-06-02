@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>🌸 Танюша 🌸</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&family=Satisfy&family=Amatic+SC:wght@700&family=Indie+Flower&family=Shadows+Into+Light&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --cream: #fff8e8;
+            --peach: #ffcba4;
+            --coral: #ff8fab;
+            --lavender: #c5a3ff;
+            --mint: #b4f8c8;
+            --sky: #a0e7ff;
+            --butter: #ffe66d;
+        }
+
+        body {
+            font-family: 'Indie Flower', cursive;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--peach) 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+        }
+
+        /* Paper texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px);
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.5;
+        }
+
+        .container {
+            max-width: 100%;
+            padding: 20px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Hero section - handwritten title */
+        .hero {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .hero-title {
+            font-family: 'Satisfy', cursive;
+            font-size: clamp(2.5rem, 10vw, 5rem);
+            color: var(--coral);
+            text-shadow: 3px 3px 0 rgba(255, 139, 171, 0.3);
+            margin-bottom: 15px;
+            opacity: 0;
+            transform: translateY(-30px) rotate(-5deg);
+        }
+
+        .hero-name {
+            font-family: 'Amatic SC', cursive;
+            font-size: clamp(2rem, 8vw, 4rem);
+            color: var(--lavender);
+            text-shadow: 2px 2px 0 rgba(197, 163, 255, 0.4);
+            line-height: 1.2;
+            margin: 20px 0;
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        .hero-age {
+            font-family: 'Caveat', cursive;
+            font-size: clamp(1.8rem, 7vw, 3.5rem);
+            color: var(--mint);
+            text-shadow: 2px 2px 0 rgba(180, 248, 200, 0.5);
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .hero-from {
+            font-family: 'Shadows Into Light', cursive;
+            font-size: clamp(1.5rem, 6vw, 2.5rem);
+            color: var(--butter);
+            text-shadow: 2px 2px 0 rgba(255, 230, 109, 0.5);
+            margin-top: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        /* Polaroid photos */
+        .photo-container {
+            position: relative;
+            min-height: 800px;
+            margin: 50px 0;
+        }
+
+        .polaroid {
+            position: absolute;
+            background: white;
+            padding: 15px 15px 60px 15px;
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.15),
+                0 0 0 1px rgba(0,0,0,0.05);
+            cursor: move;
+            cursor: grab;
+            transform-origin: center;
+            transition: box-shadow 0.3s ease;
+            opacity: 0;
+        }
+
+        .polaroid:active {
+            cursor: grabbing;
+        }
+
+        .polaroid:hover {
+            box-shadow:
+                0 15px 40px rgba(0,0,0,0.25),
+                0 0 0 1px rgba(0,0,0,0.1);
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: auto;
+            display: block;
+            pointer-events: none;
+        }
+
+        .polaroid-caption {
+            position: absolute;
+            bottom: 15px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-family: 'Covered By Your Grace', cursive;
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            color: #333;
+            padding: 0 15px;
+        }
+
+        .polaroid-1 {
+            width: clamp(250px, 70vw, 350px);
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-8deg);
+        }
+
+        .polaroid-2 {
+            width: clamp(200px, 60vw, 300px);
+            top: 400px;
+            left: 10%;
+            transform: rotate(5deg);
+        }
+
+        .polaroid-3 {
+            width: clamp(280px, 75vw, 400px);
+            top: 450px;
+            right: 5%;
+            transform: rotate(-3deg);
+        }
+
+        /* Sticker emojis - draggable */
+        .stickers {
+            position: relative;
+            z-index: 10;
+        }
+
+        .sticker {
+            position: absolute;
+            font-size: clamp(2rem, 6vw, 4rem);
+            cursor: move;
+            cursor: grab;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+            transition: filter 0.3s ease;
+            opacity: 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .sticker:active {
+            cursor: grabbing;
+        }
+
+        .sticker:hover {
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));
+        }
+
+        /* Meme section - scrapbook style */
+        .meme-board {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border: 4px dashed var(--coral);
+            border-radius: 30px;
+            padding: 30px 20px;
+            margin: 80px 0;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .meme-board::before,
+        .meme-board::after {
+            content: '📌';
+            position: absolute;
+            top: -20px;
+            font-size: 2rem;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+
+        .meme-board::before {
+            left: 20%;
+        }
+
+        .meme-board::after {
+            right: 20%;
+        }
+
+        .meme-board h2 {
+            font-family: 'Amatic SC', cursive;
+            font-size: clamp(2rem, 7vw, 3.5rem);
+            color: var(--coral);
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .meme-note {
+            background: var(--butter);
+            padding: 20px;
+            margin: 15px auto;
+            max-width: 400px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transform: rotate(-2deg);
+            font-family: 'Caveat', cursive;
+            font-size: clamp(1.2rem, 4vw, 1.6rem);
+            color: #333;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .meme-note:nth-child(even) {
+            background: var(--mint);
+            transform: rotate(2deg);
+        }
+
+        .meme-note:nth-child(3n) {
+            background: var(--sky);
+            transform: rotate(-1deg);
+        }
+
+        .meme-note:hover {
+            transform: rotate(0deg) scale(1.05);
+            z-index: 10;
+        }
+
+        /* Pavel section */
+        .pavel-section {
+            background: linear-gradient(135deg, var(--lavender), var(--sky));
+            border-radius: 30px;
+            padding: 40px 25px;
+            margin: 60px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            text-align: center;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .pavel-section::before {
+            content: '⭐';
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+
+        .pavel-section h2 {
+            font-family: 'Amatic SC', cursive;
+            font-size: clamp(2.2rem, 8vw, 4rem);
+            color: white;
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+
+        .pavel-section p {
+            font-family: 'Indie Flower', cursive;
+            font-size: clamp(1.3rem, 5vw, 2rem);
+            color: white;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.15);
+            line-height: 1.6;
+            margin: 15px 0;
+        }
+
+        /* Responsive */
+        @media (min-width: 768px) {
+            .polaroid-2 {
+                left: 15%;
+            }
+
+            .polaroid-3 {
+                right: 10%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <div class="hero-title">С Днём Рождения! 🎂</div>
+            <div class="hero-name">
+                Похиленко<br>
+                Татьяна<br>
+                Андреевна
+            </div>
+            <div class="hero-age">✨ 15 лет ✨</div>
+            <div class="hero-from">💝 От Дениса 💝</div>
+        </div>
+
+        <div class="photo-container">
+            <div class="polaroid polaroid-1">
+                <img src="tanya.jpg" alt="Татьяна">
+                <div class="polaroid-caption">Танюша 💖</div>
+            </div>
+
+            <div class="polaroid polaroid-2">
+                <img src="pavel.jpg" alt="Павел">
+                <div class="polaroid-caption">Брат Паша 🌟</div>
+            </div>
+
+            <div class="polaroid polaroid-3">
+                <img src="together.jpg" alt="Вместе">
+                <div class="polaroid-caption">Лучший дуэт 🚀</div>
+            </div>
+        </div>
+
+        <div class="stickers">
+            <div class="sticker" style="top: 20px; left: 10%;">🎈</div>
+            <div class="sticker" style="top: 150px; right: 15%;">🎉</div>
+            <div class="sticker" style="top: 300px; left: 5%;">🌸</div>
+            <div class="sticker" style="top: 500px; right: 10%;">✨</div>
+            <div class="sticker" style="top: 650px; left: 20%;">🎀</div>
+            <div class="sticker" style="top: 800px; right: 25%;">🌈</div>
+            <div class="sticker" style="top: 100px; left: 40%;">🦋</div>
+            <div class="sticker" style="top: 400px; right: 30%;">🌺</div>
+            <div class="sticker" style="top: 600px; left: 50%;">💫</div>
+            <div class="sticker" style="top: 250px; right: 5%;">🎨</div>
+        </div>
+
+        <div class="meme-board">
+            <h2>💭 Мем-доска 💭</h2>
+            <div class="meme-note">🎪 Таня - это вайб на максималках!</div>
+            <div class="meme-note">💯 15 лет легендарности!</div>
+            <div class="meme-note">🎮 Уровень крутости: МАКСИМАЛЬНЫЙ</div>
+            <div class="meme-note">⚡ Энергия: ♾️ БЕСКОНЕЧНОСТЬ</div>
+            <div class="meme-note">🌟 Когда Таня заходит - все встают!</div>
+        </div>
+
+        <div class="pavel-section">
+            <h2>🌟 Про брата Пашу 🌟</h2>
+            <p>Павел - тот, кто всегда прикроет спину! 💪</p>
+            <p>Лучший брат на планете! 🌍</p>
+            <p>Дуэт мечты: Таня + Паша = 🚀🔥⚡</p>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Draggable.min.js"></script>
+
+    <script>
+        // Register GSAP plugins
+        gsap.registerPlugin(Draggable);
+
+        // Entrance animations
+        gsap.timeline()
+            .to('.hero-title', {
+                opacity: 1,
+                y: 0,
+                rotation: 0,
+                duration: 1.2,
+                ease: 'elastic.out(1, 0.5)'
+            })
+            .to('.hero-name', {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: 'back.out(1.7)'
+            }, '-=0.6')
+            .to('.hero-age', {
+                opacity: 1,
+                scale: 1,
+                duration: 0.6,
+                ease: 'back.out(2)'
+            }, '-=0.4')
+            .to('.hero-from', {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                ease: 'power2.out'
+            }, '-=0.3');
+
+        // Polaroids cascade in
+        gsap.timeline({ delay: 0.8 })
+            .to('.polaroid-1', {
+                opacity: 1,
+                duration: 0.8,
+                ease: 'back.out(1.7)',
+                onComplete: () => {
+                    gsap.to('.polaroid-1', {
+                        rotation: '+=3',
+                        duration: 2,
+                        repeat: -1,
+                        yoyo: true,
+                        ease: 'sine.inOut'
+                    });
+                }
+            })
+            .to('.polaroid-2', {
+                opacity: 1,
+                duration: 0.8,
+                ease: 'back.out(1.7)',
+                onComplete: () => {
+                    gsap.to('.polaroid-2', {
+                        rotation: '-=4',
+                        duration: 2.5,
+                        repeat: -1,
+                        yoyo: true,
+                        ease: 'sine.inOut'
+                    });
+                }
+            }, '-=0.4')
+            .to('.polaroid-3', {
+                opacity: 1,
+                duration: 0.8,
+                ease: 'back.out(1.7)',
+                onComplete: () => {
+                    gsap.to('.polaroid-3', {
+                        rotation: '+=2',
+                        duration: 2.2,
+                        repeat: -1,
+                        yoyo: true,
+                        ease: 'sine.inOut'
+                    });
+                }
+            }, '-=0.4');
+
+        // Stickers pop in sequentially
+        gsap.to('.sticker', {
+            opacity: 1,
+            scale: 1,
+            duration: 0.5,
+            stagger: 0.15,
+            ease: 'back.out(2)',
+            delay: 1.5
+        });
+
+        // Sections scroll in
+        gsap.to('.meme-board', {
+            scrollTrigger: {
+                trigger: '.meme-board',
+                start: 'top 80%',
+                toggleActions: 'play none none none'
+            },
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power2.out'
+        });
+
+        gsap.to('.pavel-section', {
+            scrollTrigger: {
+                trigger: '.pavel-section',
+                start: 'top 80%',
+                toggleActions: 'play none none none'
+            },
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power2.out'
+        });
+
+        // Make polaroids draggable
+        Draggable.create('.polaroid', {
+            type: 'x,y',
+            bounds: 'body',
+            inertia: true,
+            onDragStart: function() {
+                gsap.to(this.target, {
+                    scale: 1.1,
+                    boxShadow: '0 20px 50px rgba(0,0,0,0.3)',
+                    duration: 0.2
+                });
+            },
+            onDragEnd: function() {
+                gsap.to(this.target, {
+                    scale: 1,
+                    boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
+                    duration: 0.3
+                });
+            }
+        });
+
+        // Make stickers draggable
+        Draggable.create('.sticker', {
+            type: 'x,y',
+            bounds: 'body',
+            inertia: true,
+            onDragStart: function() {
+                gsap.to(this.target, {
+                    scale: 1.3,
+                    duration: 0.2
+                });
+            },
+            onDragEnd: function() {
+                gsap.to(this.target, {
+                    scale: 1,
+                    duration: 0.3,
+                    ease: 'elastic.out(1, 0.5)'
+                });
+            }
+        });
+
+        // Meme notes wiggle on hover
+        document.querySelectorAll('.meme-note').forEach(note => {
+            note.addEventListener('mouseenter', () => {
+                gsap.to(note, {
+                    rotation: 0,
+                    scale: 1.05,
+                    duration: 0.3,
+                    ease: 'back.out(2)'
+                });
+            });
+
+            note.addEventListener('mouseleave', () => {
+                const randomRotation = Math.random() * 4 - 2;
+                gsap.to(note, {
+                    rotation: randomRotation,
+                    scale: 1,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+            });
+        });
+
+        // Floating animation for hero elements
+        gsap.to('.hero-title', {
+            y: '+=10',
+            duration: 3,
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut'
+        });
+
+        gsap.to('.hero-age', {
+            y: '-=8',
+            duration: 2.5,
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut',
+            delay: 0.5
+        });
+    </script>
+
+    <!-- GSAP ScrollTrigger for scroll animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+    </script>
+</body>
+</html>
