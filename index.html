@@ -43,7 +43,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Floating meme GIFs in background */
         .meme-float {
             position: fixed;
             pointer-events: none;
@@ -88,7 +87,6 @@
             padding: 20px;
         }
 
-        /* Retro header */
         header {
             text-align: center;
             padding: 40px 20px;
@@ -160,7 +158,86 @@
             75% { transform: translateX(5px) rotate(-1deg); }
         }
 
-        /* Interactive photo cards */
+        /* Gift box */
+        .gift-box {
+            text-align: center;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .gift-btn {
+            font-family: 'Titan One', cursive;
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            background: var(--pink);
+            color: white;
+            border: 8px solid var(--yellow);
+            padding: 30px 50px;
+            cursor: pointer;
+            box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            animation: giftPulse 2s infinite;
+        }
+
+        @keyframes giftPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .gift-btn:hover {
+            transform: rotate(-5deg) scale(1.1);
+            box-shadow: 15px 15px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        /* Video modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            background: var(--pink);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid white;
+        }
+
+        iframe {
+            width: 80vw;
+            height: 60vh;
+            border: 8px solid var(--yellow);
+        }
+
         .photo-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -225,7 +302,6 @@
             box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
         }
 
-        /* Meme facts - clickable boxes */
         .meme-section {
             background: rgba(255, 255, 255, 0.95);
             border: 8px solid var(--cyan);
@@ -277,7 +353,42 @@
             50% { transform: scale(1.1); }
         }
 
-        /* Pavel section - different color */
+        /* Screamer styles */
+        .screamer {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: black;
+            z-index: 99999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .screamer.active {
+            display: flex;
+            animation: flash 0.1s infinite;
+        }
+
+        @keyframes flash {
+            0%, 100% { background: black; }
+            50% { background: red; }
+        }
+
+        .screamer-text {
+            font-family: 'Titan One', cursive;
+            font-size: 10vw;
+            color: white;
+            text-shadow: 0 0 20px red;
+            animation: screamShake 0.1s infinite;
+        }
+
+        @keyframes screamShake {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(-20px, 10px) scale(1.1); }
+            50% { transform: translate(20px, -10px) scale(0.9); }
+            75% { transform: translate(-10px, -20px) scale(1.05); }
+        }
+
         .pavel-section {
             background: var(--purple);
             color: white;
@@ -303,7 +414,6 @@
             text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
         }
 
-        /* Click explosion effect */
         .explosion {
             position: fixed;
             pointer-events: none;
@@ -323,7 +433,6 @@
             }
         }
 
-        /* Footer */
         footer {
             background: rgba(255, 255, 255, 0.9);
             border: 6px solid var(--orange);
@@ -340,16 +449,28 @@
             text-shadow: 3px 3px 0 var(--cyan);
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .photo-grid {
                 grid-template-columns: 1fr;
             }
+            iframe {
+                width: 95vw;
+                height: 50vh;
+            }
+        }
+
+        /* Scroll memes */
+        .scroll-meme {
+            position: fixed;
+            font-size: 60px;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0;
+            transition: opacity 0.3s;
         }
     </style>
 </head>
 <body>
-    <!-- Floating meme GIFs -->
     <img src="meme2.gif" class="meme-float" alt="">
     <img src="meme3.gif" class="meme-float" alt="">
     <img src="meme2.gif" class="meme-float" alt="">
@@ -360,6 +481,10 @@
             <div class="subtitle">ПОХИЛЕНКО ТАТЬЯНА АНДРЕЕВНА</div>
             <div class="age-badge" onclick="this.textContent = this.textContent === '✨ 15 ЛЕТ ✨' ? '🎉 ЛЕГЕНДА! 🎉' : '✨ 15 ЛЕТ ✨'">✨ 15 ЛЕТ ✨</div>
         </header>
+
+        <div class="gift-box">
+            <button class="gift-btn" onclick="openGift()">🎁 ПОДАРОК ДЛЯ ТАНИ 🎁</button>
+        </div>
 
         <div class="photo-grid">
             <div class="photo-card" onclick="spinCard(this)">
@@ -384,24 +509,12 @@
         <div class="meme-section">
             <h2>💥 ФАКТЫ ПРО ТАНЮ 💥</h2>
             <div class="meme-grid">
-                <div class="meme-box" onclick="revealMeme(this)">
-                    🎪 КЛИКНИ МЕНЯ!
-                </div>
-                <div class="meme-box" onclick="revealMeme(this)">
-                    💯 ОТКРОЙ ФАКТ!
-                </div>
-                <div class="meme-box" onclick="revealMeme(this)">
-                    🎮 ЖМИ СЮДА!
-                </div>
-                <div class="meme-box" onclick="revealMeme(this)">
-                    ⚡ НАЖИМАЙ!
-                </div>
-                <div class="meme-box" onclick="revealMeme(this)">
-                    🌟 КЛИКАЙ!
-                </div>
-                <div class="meme-box" onclick="revealMeme(this)">
-                    🚀 ЖМАКАЙ!
-                </div>
+                <div class="meme-box" onclick="revealMeme(this)">🎪 КЛИКНИ МЕНЯ!</div>
+                <div class="meme-box" onclick="revealMeme(this)">💯 ОТКРОЙ ФАКТ!</div>
+                <div class="meme-box" onclick="revealMeme(this)">🎮 ЖМИ СЮДА!</div>
+                <div class="meme-box" onclick="revealMeme(this)">⚡ НАЖИМАЙ!</div>
+                <div class="meme-box" onclick="revealMeme(this)">🌟 КЛИКАЙ!</div>
+                <div class="meme-box danger-box" onclick="triggerScreamer()">💀 НЕ ЖМИ! 💀</div>
             </div>
         </div>
 
@@ -417,20 +530,32 @@
         </footer>
     </div>
 
+    <!-- Video modal -->
+    <div class="modal" id="videoModal">
+        <div class="modal-content">
+            <div class="modal-close" onclick="closeModal()">×</div>
+            <iframe id="videoFrame" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- Screamer -->
+    <div class="screamer" id="screamer">
+        <div class="screamer-text">АААААААА!!! 😱</div>
+    </div>
+
+    <div class="scroll-meme" id="scrollMeme">🎉</div>
+
     <script>
-        // Facts database
         const facts = [
             "Таня - это вайб на максималках! 🎪",
             "15 лет легендарности! 💯",
             "Уровень крутости: МАКСИМАЛЬНЫЙ 🎮",
             "Энергия: БЕСКОНЕЧНОСТЬ ⚡",
-            "Когда Таня заходит - все встают! 🌟",
-            "Таня = икона поколения! 🚀"
+            "Когда Таня заходит - все встают! 🌟"
         ];
 
         let factIndex = 0;
 
-        // Reveal random fact on click
         function revealMeme(box) {
             box.classList.add('revealed');
             box.textContent = facts[factIndex];
@@ -438,7 +563,6 @@
             createExplosion(event.clientX, event.clientY);
         }
 
-        // Spin card on click and increment counter
         function spinCard(card) {
             card.classList.add('clicked');
             setTimeout(() => card.classList.remove('clicked'), 500);
@@ -449,7 +573,6 @@
             createExplosion(event.clientX, event.clientY);
         }
 
-        // Create emoji explosion effect
         function createExplosion(x, y) {
             const emojis = ['💥', '✨', '🎉', '💫', '⭐', '🔥', '💖', '🎊'];
             const emoji = emojis[Math.floor(Math.random() * emojis.length)];
@@ -466,6 +589,67 @@
             setTimeout(() => explosion.remove(), 1000);
         }
 
+        // Gift opens funny video
+        function openGift() {
+            const videoModal = document.getElementById('videoModal');
+            const videoFrame = document.getElementById('videoFrame');
+
+            // Rickroll for the lulz
+            videoFrame.src = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1';
+            videoModal.classList.add('active');
+
+            createExplosion(window.innerWidth / 2, window.innerHeight / 2);
+        }
+
+        function closeModal() {
+            const videoModal = document.getElementById('videoModal');
+            const videoFrame = document.getElementById('videoFrame');
+            videoModal.classList.remove('active');
+            videoFrame.src = '';
+        }
+
+        // Screamer
+        function triggerScreamer() {
+            const screamer = document.getElementById('screamer');
+            screamer.classList.add('active');
+
+            // Play scream sound (using Web Audio API)
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            oscillator.frequency.value = 200;
+            oscillator.type = 'sawtooth';
+            gainNode.gain.value = 0.3;
+
+            oscillator.start();
+
+            setTimeout(() => {
+                oscillator.stop();
+                screamer.classList.remove('active');
+            }, 2000);
+        }
+
+        // Scroll memes
+        let scrollTimeout;
+        const scrollMeme = document.getElementById('scrollMeme');
+        const scrollEmojis = ['🎉', '✨', '🔥', '💫', '⭐', '💖', '🚀', '🎊'];
+
+        window.addEventListener('scroll', () => {
+            scrollMeme.textContent = scrollEmojis[Math.floor(Math.random() * scrollEmojis.length)];
+            scrollMeme.style.left = Math.random() * (window.innerWidth - 60) + 'px';
+            scrollMeme.style.top = Math.random() * (window.innerHeight - 60) + 'px';
+            scrollMeme.style.opacity = '1';
+
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                scrollMeme.style.opacity = '0';
+            }, 300);
+        });
+
         // Random color change on header
         const header = document.querySelector('header');
         setInterval(() => {
@@ -473,9 +657,9 @@
             header.style.borderColor = colors[Math.floor(Math.random() * colors.length)];
         }, 2000);
 
-        // Add click handler to body for explosions
+        // Click explosions anywhere
         document.body.addEventListener('click', (e) => {
-            if (!e.target.closest('.photo-card, .meme-box, .age-badge')) {
+            if (!e.target.closest('.photo-card, .meme-box, .age-badge, .gift-btn, .modal-close')) {
                 createExplosion(e.clientX, e.clientY);
             }
         });
