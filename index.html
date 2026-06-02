@@ -7,7 +7,7 @@
     <title>🔥 ТАНЮША - ЛЕГЕНДА 🔥</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Shade&family=Luckiest+Guy&family=Fredoka+One&family=Titan+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Sigmar+One&family=Lilita+One&family=Baloo+2:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -26,13 +26,13 @@
         }
 
         body {
-            font-family: 'Fredoka One', cursive;
+            font-family: 'Baloo 2', cursive;
             background: linear-gradient(45deg, var(--yellow), var(--pink), var(--cyan), var(--lime));
             background-size: 400% 400%;
             animation: rainbowBg 10s ease infinite;
             min-height: 100vh;
             overflow-x: hidden;
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><circle cx="10" cy="10" r="8" fill="%23ff1493"/></svg>'), auto;
+            position: relative;
         }
 
         @keyframes rainbowBg {
@@ -43,40 +43,43 @@
             100% { background-position: 0% 50%; }
         }
 
-        .meme-float {
+        /* 3D canvases */
+        #heart-canvas {
             position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 150px;
+            height: 150px;
+            z-index: 10;
             pointer-events: none;
-            opacity: 0.3;
-            z-index: 1;
-            animation: floatAround 20s infinite ease-in-out;
         }
 
-        .meme-float:nth-child(1) {
-            width: 80px;
-            top: 10%;
-            left: 5%;
-            animation-delay: 0s;
+        #cucumber-canvas {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 150px;
+            height: 150px;
+            z-index: 10;
+            pointer-events: none;
         }
 
-        .meme-float:nth-child(2) {
-            width: 100px;
-            top: 60%;
-            right: 10%;
-            animation-delay: 5s;
-        }
+        @media (max-width: 768px) {
+            #heart-canvas,
+            #cucumber-canvas {
+                width: 80px;
+                height: 80px;
+            }
 
-        .meme-float:nth-child(3) {
-            width: 90px;
-            bottom: 15%;
-            left: 15%;
-            animation-delay: 10s;
-        }
+            #heart-canvas {
+                right: 5px;
+            }
 
-        @keyframes floatAround {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(30px, -30px) rotate(90deg); }
-            50% { transform: translate(-20px, 20px) rotate(180deg); }
-            75% { transform: translate(40px, 10px) rotate(270deg); }
+            #cucumber-canvas {
+                left: 5px;
+            }
         }
 
         .container {
@@ -92,10 +95,8 @@
             padding: 40px 20px;
             background: rgba(255, 255, 255, 0.9);
             border: 8px dashed var(--pink);
-            border-radius: 0;
             margin-bottom: 30px;
             box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.3);
-            position: relative;
             animation: headerBounce 2s ease-in-out infinite;
         }
 
@@ -114,8 +115,8 @@
         }
 
         h1 {
-            font-family: 'Bungee Shade', cursive;
-            font-size: clamp(2rem, 8vw, 5rem);
+            font-family: 'Sigmar One', cursive;
+            font-size: clamp(2.5rem, 10vw, 5rem);
             color: var(--pink);
             text-shadow:
                 4px 4px 0 var(--cyan),
@@ -125,8 +126,8 @@
         }
 
         .subtitle {
-            font-family: 'Luckiest Guy', cursive;
-            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            font-family: 'Lilita One', cursive;
+            font-size: clamp(1.3rem, 5vw, 2.5rem);
             color: var(--orange);
             text-shadow: 3px 3px 0 var(--purple);
             margin: 15px 0;
@@ -139,8 +140,8 @@
             padding: 15px 30px;
             border: 5px solid var(--purple);
             border-radius: 50px;
-            font-family: 'Titan One', cursive;
-            font-size: clamp(1.3rem, 4vw, 2rem);
+            font-family: 'Chewy', cursive;
+            font-size: clamp(1.5rem, 5vw, 2rem);
             transform: rotate(3deg);
             box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.3);
             cursor: pointer;
@@ -158,15 +159,13 @@
             75% { transform: translateX(5px) rotate(-1deg); }
         }
 
-        /* Gift box */
         .gift-box {
             text-align: center;
             margin: 40px 0;
-            position: relative;
         }
 
         .gift-btn {
-            font-family: 'Titan One', cursive;
+            font-family: 'Chewy', cursive;
             font-size: clamp(1.5rem, 5vw, 2.5rem);
             background: var(--pink);
             color: white;
@@ -188,7 +187,6 @@
             box-shadow: 15px 15px 0 rgba(0, 0, 0, 0.4);
         }
 
-        /* Video modal */
         .modal {
             display: none;
             position: fixed;
@@ -240,7 +238,7 @@
 
         .photo-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
             margin: 40px 0;
         }
@@ -248,13 +246,11 @@
         .photo-card {
             background: white;
             border: 6px solid var(--pink);
-            border-radius: 0;
             padding: 15px;
             box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
-            overflow: hidden;
         }
 
         .photo-card:hover {
@@ -280,8 +276,8 @@
         }
 
         .photo-label {
-            font-family: 'Bungee', cursive;
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-family: 'Lilita One', cursive;
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
             color: var(--pink);
             text-align: center;
             margin-top: 15px;
@@ -311,8 +307,8 @@
         }
 
         .meme-section h2 {
-            font-family: 'Bungee', cursive;
-            font-size: clamp(2rem, 6vw, 3rem);
+            font-family: 'Sigmar One', cursive;
+            font-size: clamp(2rem, 7vw, 3rem);
             color: var(--orange);
             text-shadow: 3px 3px 0 var(--purple);
             margin-bottom: 25px;
@@ -321,7 +317,7 @@
 
         .meme-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
             gap: 20px;
         }
 
@@ -329,11 +325,10 @@
             background: var(--yellow);
             border: 5px solid var(--pink);
             padding: 20px;
-            font-size: clamp(1rem, 3vw, 1.3rem);
+            font-size: clamp(1rem, 3.5vw, 1.3rem);
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            position: relative;
             box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.3);
         }
 
@@ -353,7 +348,6 @@
             50% { transform: scale(1.1); }
         }
 
-        /* Screamer styles */
         .screamer {
             display: none;
             position: fixed;
@@ -375,7 +369,7 @@
         }
 
         .screamer-text {
-            font-family: 'Titan One', cursive;
+            font-family: 'Sigmar One', cursive;
             font-size: 10vw;
             color: white;
             text-shadow: 0 0 20px red;
@@ -400,15 +394,15 @@
         }
 
         .pavel-section h2 {
-            font-family: 'Titan One', cursive;
-            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-family: 'Chewy', cursive;
+            font-size: clamp(2rem, 7vw, 3.5rem);
             color: var(--yellow);
             text-shadow: 4px 4px 0 var(--pink);
             margin-bottom: 20px;
         }
 
         .pavel-section p {
-            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            font-size: clamp(1.2rem, 4.5vw, 1.8rem);
             line-height: 1.6;
             margin: 15px 0;
             text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
@@ -443,14 +437,15 @@
         }
 
         .signature {
-            font-family: 'Luckiest Guy', cursive;
+            font-family: 'Lilita One', cursive;
             font-size: clamp(1.5rem, 5vw, 2.5rem);
             color: var(--pink);
             text-shadow: 3px 3px 0 var(--cyan);
         }
 
         @media (max-width: 768px) {
-            .photo-grid {
+            .photo-grid,
+            .meme-grid {
                 grid-template-columns: 1fr;
             }
             iframe {
@@ -459,7 +454,6 @@
             }
         }
 
-        /* Scroll memes */
         .scroll-meme {
             position: fixed;
             font-size: 60px;
@@ -471,9 +465,9 @@
     </style>
 </head>
 <body>
-    <img src="meme2.gif" class="meme-float" alt="">
-    <img src="meme3.gif" class="meme-float" alt="">
-    <img src="meme2.gif" class="meme-float" alt="">
+    <!-- 3D Canvases -->
+    <canvas id="heart-canvas"></canvas>
+    <canvas id="cucumber-canvas"></canvas>
 
     <div class="container">
         <header>
@@ -530,7 +524,6 @@
         </footer>
     </div>
 
-    <!-- Video modal -->
     <div class="modal" id="videoModal">
         <div class="modal-content">
             <div class="modal-close" onclick="closeModal()">×</div>
@@ -538,12 +531,125 @@
         </div>
     </div>
 
-    <!-- Screamer -->
     <div class="screamer" id="screamer">
         <div class="screamer-text">АААААААА!!! 😱</div>
     </div>
 
     <div class="scroll-meme" id="scrollMeme">🎉</div>
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+
+        // Heart 3D
+        function initHeart() {
+            const canvas = document.getElementById('heart-canvas');
+            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+            renderer.setSize(canvas.width, canvas.height);
+            renderer.setPixelRatio(window.devicePixelRatio);
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+            camera.position.z = 5;
+
+            // Heart shape
+            const heartShape = new THREE.Shape();
+            heartShape.moveTo(0, 0);
+            heartShape.bezierCurveTo(0, -0.3, -0.6, -0.3, -0.6, 0);
+            heartShape.bezierCurveTo(-0.6, 0.3, 0, 0.6, 0, 1);
+            heartShape.bezierCurveTo(0, 0.6, 0.6, 0.3, 0.6, 0);
+            heartShape.bezierCurveTo(0.6, -0.3, 0, -0.3, 0, 0);
+
+            const extrudeSettings = {
+                depth: 0.4,
+                bevelEnabled: true,
+                bevelThickness: 0.1,
+                bevelSize: 0.1,
+                bevelSegments: 5
+            };
+
+            const geometry = new THREE.ExtrudeGeometry(heartShape, extrudeSettings);
+            const material = new THREE.MeshStandardMaterial({
+                color: 0xff1493,
+                metalness: 0.3,
+                roughness: 0.4
+            });
+            const heart = new THREE.Mesh(geometry, material);
+            heart.position.set(0, -0.3, 0);
+            scene.add(heart);
+
+            const light = new THREE.DirectionalLight(0xffffff, 1);
+            light.position.set(5, 5, 5);
+            scene.add(light);
+            scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+
+            function animate() {
+                requestAnimationFrame(animate);
+                heart.rotation.y += 0.01;
+                renderer.render(scene, camera);
+            }
+            animate();
+        }
+
+        // Cucumber 3D
+        function initCucumber() {
+            const canvas = document.getElementById('cucumber-canvas');
+            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+            renderer.setSize(canvas.width, canvas.height);
+            renderer.setPixelRatio(window.devicePixelRatio);
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+            camera.position.z = 5;
+
+            const geometry = new THREE.CylinderGeometry(0.3, 0.35, 2, 16);
+            const material = new THREE.MeshStandardMaterial({
+                color: 0x00ff00,
+                metalness: 0.2,
+                roughness: 0.6
+            });
+            const cucumber = new THREE.Mesh(geometry, material);
+            scene.add(cucumber);
+
+            // Bumps on cucumber
+            const bumpGeo = new THREE.SphereGeometry(0.08, 8, 8);
+            const bumpMat = new THREE.MeshStandardMaterial({ color: 0x00aa00 });
+            for (let i = 0; i < 12; i++) {
+                const bump = new THREE.Mesh(bumpGeo, bumpMat);
+                const angle = (i / 12) * Math.PI * 2;
+                bump.position.set(
+                    Math.cos(angle) * 0.32,
+                    (Math.random() - 0.5) * 1.8,
+                    Math.sin(angle) * 0.32
+                );
+                cucumber.add(bump);
+            }
+
+            const light = new THREE.DirectionalLight(0xffffff, 1);
+            light.position.set(5, 5, 5);
+            scene.add(light);
+            scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+
+            function animate() {
+                requestAnimationFrame(animate);
+                cucumber.rotation.y += 0.01;
+                cucumber.rotation.z = Math.sin(Date.now() * 0.001) * 0.2;
+                renderer.render(scene, camera);
+            }
+            animate();
+        }
+
+        initHeart();
+        initCucumber();
+    </script>
 
     <script>
         const facts = [
@@ -589,15 +695,11 @@
             setTimeout(() => explosion.remove(), 1000);
         }
 
-        // Gift opens funny video
         function openGift() {
             const videoModal = document.getElementById('videoModal');
             const videoFrame = document.getElementById('videoFrame');
-
-            // Rickroll for the lulz
             videoFrame.src = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1';
             videoModal.classList.add('active');
-
             createExplosion(window.innerWidth / 2, window.innerHeight / 2);
         }
 
@@ -608,12 +710,10 @@
             videoFrame.src = '';
         }
 
-        // Screamer
         function triggerScreamer() {
             const screamer = document.getElementById('screamer');
             screamer.classList.add('active');
 
-            // Play scream sound (using Web Audio API)
             const audioContext = new (window.AudioContext || window.webkitAudioContext)();
             const oscillator = audioContext.createOscillator();
             const gainNode = audioContext.createGain();
@@ -633,7 +733,6 @@
             }, 2000);
         }
 
-        // Scroll memes
         let scrollTimeout;
         const scrollMeme = document.getElementById('scrollMeme');
         const scrollEmojis = ['🎉', '✨', '🔥', '💫', '⭐', '💖', '🚀', '🎊'];
@@ -650,14 +749,12 @@
             }, 300);
         });
 
-        // Random color change on header
         const header = document.querySelector('header');
         setInterval(() => {
             const colors = ['var(--pink)', 'var(--cyan)', 'var(--yellow)', 'var(--lime)'];
             header.style.borderColor = colors[Math.floor(Math.random() * colors.length)];
         }, 2000);
 
-        // Click explosions anywhere
         document.body.addEventListener('click', (e) => {
             if (!e.target.closest('.photo-card, .meme-box, .age-badge, .gift-btn, .modal-close')) {
                 createExplosion(e.clientX, e.clientY);
