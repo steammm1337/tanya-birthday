@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>Татьяна Похиленко</title>
+    <title>🔥 ТАНЮША - ЛЕГЕНДА 🔥</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Shade&family=Luckiest+Guy&family=Fredoka+One&family=Titan+One&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -17,516 +17,467 @@
         }
 
         :root {
-            --white: #ffffff;
-            --off-white: #fafafa;
-            --light-grey: #e8e8e8;
-            --mid-grey: #9e9e9e;
-            --dark-grey: #2a2a2a;
-            --black: #0a0a0a;
-            --accent: #ff3366;
+            --yellow: #ffeb3b;
+            --pink: #ff1493;
+            --cyan: #00ffff;
+            --lime: #00ff00;
+            --orange: #ff6600;
+            --purple: #9c27b0;
         }
 
         body {
-            font-family: 'Work Sans', sans-serif;
-            background: var(--white);
-            color: var(--black);
-            line-height: 1.6;
+            font-family: 'Fredoka One', cursive;
+            background: linear-gradient(45deg, var(--yellow), var(--pink), var(--cyan), var(--lime));
+            background-size: 400% 400%;
+            animation: rainbowBg 10s ease infinite;
+            min-height: 100vh;
             overflow-x: hidden;
-            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><circle cx="10" cy="10" r="8" fill="%23ff1493"/></svg>'), auto;
+        }
+
+        @keyframes rainbowBg {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 100% 50%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating meme GIFs in background */
+        .meme-float {
+            position: fixed;
+            pointer-events: none;
+            opacity: 0.3;
+            z-index: 1;
+            animation: floatAround 20s infinite ease-in-out;
+        }
+
+        .meme-float:nth-child(1) {
+            width: 80px;
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .meme-float:nth-child(2) {
+            width: 100px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+
+        .meme-float:nth-child(3) {
+            width: 90px;
+            bottom: 15%;
+            left: 15%;
+            animation-delay: 10s;
+        }
+
+        @keyframes floatAround {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(30px, -30px) rotate(90deg); }
+            50% { transform: translate(-20px, 20px) rotate(180deg); }
+            75% { transform: translate(40px, 10px) rotate(270deg); }
         }
 
         .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-        }
-
-        /* Header */
-        header {
-            padding: 60px 0 120px;
-            border-bottom: 1px solid var(--light-grey);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header-content {
             position: relative;
             z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
-        .label {
-            font-size: 11px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--mid-grey);
-            font-weight: 600;
+        /* Retro header */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 8px dashed var(--pink);
+            border-radius: 0;
             margin-bottom: 30px;
-            opacity: 0;
-            animation: fadeUp 0.8s ease forwards 0.2s;
+            box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: headerBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes headerBounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(-1deg); }
+        }
+
+        .blink {
+            animation: blinkAnim 1s linear infinite;
+        }
+
+        @keyframes blinkAnim {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
         }
 
         h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 10vw, 8rem);
-            font-weight: 900;
-            line-height: 0.95;
-            letter-spacing: -0.03em;
+            font-family: 'Bungee Shade', cursive;
+            font-size: clamp(2rem, 8vw, 5rem);
+            color: var(--pink);
+            text-shadow:
+                4px 4px 0 var(--cyan),
+                8px 8px 0 var(--yellow);
             margin-bottom: 20px;
-            opacity: 0;
-            animation: fadeUp 0.8s ease forwards 0.4s;
+            transform: rotate(-2deg);
         }
 
         .subtitle {
-            font-size: clamp(1.2rem, 3vw, 2rem);
-            color: var(--mid-grey);
-            font-weight: 300;
-            margin-bottom: 40px;
-            opacity: 0;
-            animation: fadeUp 0.8s ease forwards 0.6s;
+            font-family: 'Luckiest Guy', cursive;
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            color: var(--orange);
+            text-shadow: 3px 3px 0 var(--purple);
+            margin: 15px 0;
         }
 
-        .meta {
-            display: flex;
-            gap: 40px;
-            flex-wrap: wrap;
-            opacity: 0;
-            animation: fadeUp 0.8s ease forwards 0.8s;
+        .age-badge {
+            display: inline-block;
+            background: var(--lime);
+            color: var(--purple);
+            padding: 15px 30px;
+            border: 5px solid var(--purple);
+            border-radius: 50px;
+            font-family: 'Titan One', cursive;
+            font-size: clamp(1.3rem, 4vw, 2rem);
+            transform: rotate(3deg);
+            box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: transform 0.2s;
         }
 
-        .meta-item {
-            font-size: 14px;
+        .age-badge:hover {
+            transform: rotate(-3deg) scale(1.1);
+            animation: shake 0.5s infinite;
         }
 
-        .meta-label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--mid-grey);
-            margin-bottom: 5px;
+        @keyframes shake {
+            0%, 100% { transform: translateX(0) rotate(-3deg); }
+            25% { transform: translateX(-5px) rotate(-5deg); }
+            75% { transform: translateX(5px) rotate(-1deg); }
         }
 
-        .meta-value {
-            font-weight: 600;
-            color: var(--black);
-        }
-
-        /* Background decoration */
-        .header-bg {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 50%;
-            height: 100%;
-            opacity: 0.03;
-            background: url('bg1.jpg') center/cover;
-            filter: grayscale(100%);
-        }
-
-        /* Photo grid */
-        .photo-section {
-            padding: 100px 0;
-        }
-
-        .grid {
+        /* Interactive photo cards */
+        .photo-grid {
             display: grid;
-            grid-template-columns: repeat(12, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
-            margin-bottom: 100px;
+            margin: 40px 0;
         }
 
         .photo-card {
+            background: white;
+            border: 6px solid var(--pink);
+            border-radius: 0;
+            padding: 15px;
+            box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
             position: relative;
             overflow: hidden;
-            background: var(--off-white);
-            opacity: 0;
-            transform: translateY(40px);
-            transition: transform 0.4s ease;
         }
 
         .photo-card:hover {
-            transform: translateY(-10px);
+            transform: rotate(-3deg) scale(1.05);
+            box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.4);
+            border-color: var(--cyan);
+        }
+
+        .photo-card.clicked {
+            animation: spinCard 0.5s ease;
+        }
+
+        @keyframes spinCard {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .photo-card img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
             display: block;
-            transition: transform 0.6s ease;
+            border: 3px solid var(--yellow);
         }
 
-        .photo-card:hover img {
-            transform: scale(1.05);
-        }
-
-        .photo-1 {
-            grid-column: 1 / 8;
-            aspect-ratio: 4/5;
-            animation: fadeUp 0.8s ease forwards 1s;
-        }
-
-        .photo-2 {
-            grid-column: 8 / 13;
-            aspect-ratio: 3/4;
-            animation: fadeUp 0.8s ease forwards 1.2s;
-        }
-
-        .photo-3 {
-            grid-column: 1 / 13;
-            aspect-ratio: 16/9;
-            animation: fadeUp 0.8s ease forwards 1.4s;
-        }
-
-        .photo-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 30px;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            color: white;
-            font-size: 14px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            font-weight: 600;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.4s ease;
-        }
-
-        .photo-card:hover .photo-caption {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Content sections */
-        .content-section {
-            padding: 80px 0;
-            border-top: 1px solid var(--light-grey);
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 60px;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 5vw, 4rem);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
-
-        .section-number {
-            font-size: 14px;
-            color: var(--mid-grey);
-            font-weight: 600;
-        }
-
-        /* Quote blocks */
-        .quotes {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
-
-        .quote-card {
-            padding: 40px;
-            background: var(--off-white);
-            position: relative;
-            transition: background 0.3s ease;
-        }
-
-        .quote-card:hover {
-            background: var(--light-grey);
-        }
-
-        .quote-card::before {
-            content: '"';
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-family: 'Playfair Display', serif;
-            font-size: 120px;
-            color: var(--accent);
-            opacity: 0.1;
-            line-height: 1;
-        }
-
-        .quote-text {
-            font-size: 18px;
-            line-height: 1.8;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .quote-author {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--mid-grey);
-            font-weight: 600;
-        }
-
-        /* Pavel section */
-        .pavel-section {
-            padding: 100px 0;
-            background: var(--black);
-            color: var(--white);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .pavel-bg {
-            position: absolute;
-            inset: 0;
-            background: url('bg2.jpg') center/cover;
-            opacity: 0.05;
-            filter: grayscale(100%);
-        }
-
-        .pavel-content {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-        }
-
-        .pavel-section .section-title {
-            color: var(--white);
-            margin-bottom: 40px;
-        }
-
-        .pavel-text {
+        .photo-label {
+            font-family: 'Bungee', cursive;
             font-size: clamp(1.2rem, 3vw, 1.8rem);
-            line-height: 1.8;
-            font-weight: 300;
-            margin-bottom: 30px;
+            color: var(--pink);
+            text-align: center;
+            margin-top: 15px;
+            text-shadow: 2px 2px 0 var(--cyan);
+        }
+
+        .click-counter {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--orange);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            border: 3px solid white;
+            box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        /* Meme facts - clickable boxes */
+        .meme-section {
+            background: rgba(255, 255, 255, 0.95);
+            border: 8px solid var(--cyan);
+            padding: 30px;
+            margin: 40px 0;
+            box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .meme-section h2 {
+            font-family: 'Bungee', cursive;
+            font-size: clamp(2rem, 6vw, 3rem);
+            color: var(--orange);
+            text-shadow: 3px 3px 0 var(--purple);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .meme-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .meme-box {
+            background: var(--yellow);
+            border: 5px solid var(--pink);
+            padding: 20px;
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .meme-box:hover {
+            background: var(--lime);
+            transform: scale(1.05) rotate(-2deg);
+            box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        .meme-box.revealed {
+            background: var(--cyan);
+            animation: pulse 0.5s ease;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Pavel section - different color */
+        .pavel-section {
+            background: var(--purple);
+            color: white;
+            padding: 40px;
+            border: 8px solid var(--yellow);
+            margin: 40px 0;
+            box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.4);
+            text-align: center;
+        }
+
+        .pavel-section h2 {
+            font-family: 'Titan One', cursive;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            color: var(--yellow);
+            text-shadow: 4px 4px 0 var(--pink);
+            margin-bottom: 20px;
+        }
+
+        .pavel-section p {
+            font-size: clamp(1.2rem, 4vw, 1.8rem);
+            line-height: 1.6;
+            margin: 15px 0;
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        /* Click explosion effect */
+        .explosion {
+            position: fixed;
+            pointer-events: none;
+            font-size: 40px;
+            animation: explode 1s ease-out forwards;
+            z-index: 9999;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--x), var(--y)) scale(2);
+                opacity: 0;
+            }
         }
 
         /* Footer */
         footer {
-            padding: 60px 0;
-            border-top: 1px solid var(--light-grey);
+            background: rgba(255, 255, 255, 0.9);
+            border: 6px solid var(--orange);
+            padding: 30px;
             text-align: center;
-        }
-
-        .footer-text {
-            font-size: 14px;
-            color: var(--mid-grey);
-            letter-spacing: 1px;
+            margin-top: 40px;
+            box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.3);
         }
 
         .signature {
-            font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            font-style: italic;
-            color: var(--accent);
-            margin-top: 20px;
-        }
-
-        /* Animations */
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            font-family: 'Luckiest Guy', cursive;
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            color: var(--pink);
+            text-shadow: 3px 3px 0 var(--cyan);
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .container {
-                padding: 0 20px;
+            .photo-grid {
+                grid-template-columns: 1fr;
             }
-
-            header {
-                padding: 40px 0 80px;
-            }
-
-            .photo-1,
-            .photo-2,
-            .photo-3 {
-                grid-column: 1 / 13;
-            }
-
-            .section-header {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .meta {
-                gap: 20px;
-            }
-        }
-
-        /* Decorative elements */
-        .accent-line {
-            width: 60px;
-            height: 2px;
-            background: var(--accent);
-            margin: 40px 0;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="header-bg"></div>
-        <div class="container">
-            <div class="header-content">
-                <div class="label">Профиль</div>
-                <h1>Татьяна<br>Похиленко</h1>
-                <div class="subtitle">Легенда, вайб, эстетика</div>
-                <div class="meta">
-                    <div class="meta-item">
-                        <div class="meta-label">Возраст</div>
-                        <div class="meta-value">15 лет</div>
-                    </div>
-                    <div class="meta-item">
-                        <div class="meta-label">Статус</div>
-                        <div class="meta-value">Икона поколения</div>
-                    </div>
-                    <div class="meta-item">
-                        <div class="meta-label">Уровень</div>
-                        <div class="meta-value">Максимальный</div>
-                    </div>
+    <!-- Floating meme GIFs -->
+    <img src="meme2.gif" class="meme-float" alt="">
+    <img src="meme3.gif" class="meme-float" alt="">
+    <img src="meme2.gif" class="meme-float" alt="">
+
+    <div class="container">
+        <header>
+            <h1 class="blink">🔥 ТАНЮША 🔥</h1>
+            <div class="subtitle">ПОХИЛЕНКО ТАТЬЯНА АНДРЕЕВНА</div>
+            <div class="age-badge" onclick="this.textContent = this.textContent === '✨ 15 ЛЕТ ✨' ? '🎉 ЛЕГЕНДА! 🎉' : '✨ 15 ЛЕТ ✨'">✨ 15 ЛЕТ ✨</div>
+        </header>
+
+        <div class="photo-grid">
+            <div class="photo-card" onclick="spinCard(this)">
+                <span class="click-counter">Кликов: <span class="count">0</span></span>
+                <img src="tanya.jpg" alt="Татьяна">
+                <div class="photo-label">ТАНЮША 👑</div>
+            </div>
+
+            <div class="photo-card" onclick="spinCard(this)">
+                <span class="click-counter">Кликов: <span class="count">0</span></span>
+                <img src="pavel.jpg" alt="Павел">
+                <div class="photo-label">БРАТ ПАША 😎</div>
+            </div>
+
+            <div class="photo-card" onclick="spinCard(this)">
+                <span class="click-counter">Кликов: <span class="count">0</span></span>
+                <img src="together.jpg" alt="Вместе">
+                <div class="photo-label">ЛЕГЕНДЫ 🚀</div>
+            </div>
+        </div>
+
+        <div class="meme-section">
+            <h2>💥 ФАКТЫ ПРО ТАНЮ 💥</h2>
+            <div class="meme-grid">
+                <div class="meme-box" onclick="revealMeme(this)">
+                    🎪 КЛИКНИ МЕНЯ!
+                </div>
+                <div class="meme-box" onclick="revealMeme(this)">
+                    💯 ОТКРОЙ ФАКТ!
+                </div>
+                <div class="meme-box" onclick="revealMeme(this)">
+                    🎮 ЖМИ СЮДА!
+                </div>
+                <div class="meme-box" onclick="revealMeme(this)">
+                    ⚡ НАЖИМАЙ!
+                </div>
+                <div class="meme-box" onclick="revealMeme(this)">
+                    🌟 КЛИКАЙ!
+                </div>
+                <div class="meme-box" onclick="revealMeme(this)">
+                    🚀 ЖМАКАЙ!
                 </div>
             </div>
         </div>
-    </header>
 
-    <section class="photo-section">
-        <div class="container">
-            <div class="grid">
-                <div class="photo-card photo-1">
-                    <img src="tanya.jpg" alt="Татьяна">
-                    <div class="photo-caption">Танюша</div>
-                </div>
-                <div class="photo-card photo-2">
-                    <img src="pavel.jpg" alt="Павел">
-                    <div class="photo-caption">Брат Паша</div>
-                </div>
-                <div class="photo-card photo-3">
-                    <img src="together.jpg" alt="Вместе">
-                    <div class="photo-caption">Легендарный дуэт</div>
-                </div>
-            </div>
+        <div class="pavel-section">
+            <h2>🌟 ПРО БРАТА ПАШУ 🌟</h2>
+            <p>💪 Павел - тот, кто всегда прикроет спину!</p>
+            <p>🌍 Лучший брат на планете!</p>
+            <p>🚀🔥⚡ Дуэт мечты: Таня + Паша = ЛЕГЕНДА!</p>
         </div>
-    </section>
 
-    <section class="content-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Факты</h2>
-                <span class="section-number">01</span>
-            </div>
-            <div class="quotes">
-                <div class="quote-card">
-                    <p class="quote-text">Таня — это вайб на максималках. Когда она заходит, атмосфера меняется мгновенно.</p>
-                    <div class="quote-author">Очевидец</div>
-                </div>
-                <div class="quote-card">
-                    <p class="quote-text">15 лет легендарности. Уровень крутости просто зашкаливает.</p>
-                    <div class="quote-author">Свидетель</div>
-                </div>
-                <div class="quote-card">
-                    <p class="quote-text">Энергия бесконечная. Когда Таня в деле — все встают и аплодируют.</p>
-                    <div class="quote-author">Знакомый</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="pavel-section">
-        <div class="pavel-bg"></div>
-        <div class="container">
-            <div class="pavel-content">
-                <div class="section-header">
-                    <h2 class="section-title">Про Павла</h2>
-                    <span class="section-number" style="color: var(--mid-grey);">02</span>
-                </div>
-                <div class="accent-line"></div>
-                <p class="pavel-text">Павел — это тот, кто всегда прикроет спину. Лучший брат на планете.</p>
-                <p class="pavel-text">Дуэт мечты: Таня + Паша = абсолютная легенда.</p>
-                <p class="pavel-text">Вместе они непобедимы. Энергия, драйв, стиль — всё на высшем уровне.</p>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <p class="footer-text">Создано с любовью</p>
-            <p class="signature">— Денис</p>
-        </div>
-    </footer>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+        <footer>
+            <div class="signature">💝 ОТ ДЕНИСА 💝</div>
+        </footer>
+    </div>
 
     <script>
-        gsap.registerPlugin(ScrollTrigger);
+        // Facts database
+        const facts = [
+            "Таня - это вайб на максималках! 🎪",
+            "15 лет легендарности! 💯",
+            "Уровень крутости: МАКСИМАЛЬНЫЙ 🎮",
+            "Энергия: БЕСКОНЕЧНОСТЬ ⚡",
+            "Когда Таня заходит - все встают! 🌟",
+            "Таня = икона поколения! 🚀"
+        ];
 
-        // Smooth scroll reveal for sections
-        gsap.utils.toArray('.content-section, .pavel-section').forEach(section => {
-            gsap.from(section, {
-                scrollTrigger: {
-                    trigger: section,
-                    start: 'top 80%',
-                    toggleActions: 'play none none none'
-                },
-                opacity: 0,
-                y: 50,
-                duration: 1,
-                ease: 'power2.out'
-            });
-        });
+        let factIndex = 0;
 
-        // Quote cards stagger
-        gsap.from('.quote-card', {
-            scrollTrigger: {
-                trigger: '.quotes',
-                start: 'top 80%'
-            },
-            opacity: 0,
-            y: 30,
-            stagger: 0.2,
-            duration: 0.8,
-            ease: 'power2.out'
-        });
+        // Reveal random fact on click
+        function revealMeme(box) {
+            box.classList.add('revealed');
+            box.textContent = facts[factIndex];
+            factIndex = (factIndex + 1) % facts.length;
+            createExplosion(event.clientX, event.clientY);
+        }
 
-        // Parallax effect on backgrounds
-        gsap.to('.header-bg', {
-            scrollTrigger: {
-                trigger: 'header',
-                start: 'top top',
-                end: 'bottom top',
-                scrub: 1
-            },
-            y: 200,
-            ease: 'none'
-        });
+        // Spin card on click and increment counter
+        function spinCard(card) {
+            card.classList.add('clicked');
+            setTimeout(() => card.classList.remove('clicked'), 500);
 
-        gsap.to('.pavel-bg', {
-            scrollTrigger: {
-                trigger: '.pavel-section',
-                start: 'top bottom',
-                end: 'bottom top',
-                scrub: 1
-            },
-            y: -100,
-            ease: 'none'
-        });
+            const counter = card.querySelector('.count');
+            counter.textContent = parseInt(counter.textContent) + 1;
 
-        // Accent line animation
-        gsap.from('.accent-line', {
-            scrollTrigger: {
-                trigger: '.accent-line',
-                start: 'top 90%'
-            },
-            width: 0,
-            duration: 1,
-            ease: 'power2.out'
+            createExplosion(event.clientX, event.clientY);
+        }
+
+        // Create emoji explosion effect
+        function createExplosion(x, y) {
+            const emojis = ['💥', '✨', '🎉', '💫', '⭐', '🔥', '💖', '🎊'];
+            const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+
+            const explosion = document.createElement('div');
+            explosion.className = 'explosion';
+            explosion.textContent = emoji;
+            explosion.style.left = x + 'px';
+            explosion.style.top = y + 'px';
+            explosion.style.setProperty('--x', (Math.random() - 0.5) * 200 + 'px');
+            explosion.style.setProperty('--y', (Math.random() - 0.5) * 200 + 'px');
+
+            document.body.appendChild(explosion);
+            setTimeout(() => explosion.remove(), 1000);
+        }
+
+        // Random color change on header
+        const header = document.querySelector('header');
+        setInterval(() => {
+            const colors = ['var(--pink)', 'var(--cyan)', 'var(--yellow)', 'var(--lime)'];
+            header.style.borderColor = colors[Math.floor(Math.random() * colors.length)];
+        }, 2000);
+
+        // Add click handler to body for explosions
+        document.body.addEventListener('click', (e) => {
+            if (!e.target.closest('.photo-card, .meme-box, .age-badge')) {
+                createExplosion(e.clientX, e.clientY);
+            }
         });
     </script>
 </body>
