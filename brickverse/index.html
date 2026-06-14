@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <script>document.documentElement.className += " has-js";</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <title>BRICKVERSE — мир из кубиков LEGO</title>
+  <meta name="description" content="BRICKVERSE — интерактивный мир из кубиков. Машинка едет за курсором, минифигурка из золота и куча кирпичиков." />
+
+  <!-- Fonts: blocky + playful -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Bungee&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- SVG pixelation filter (used once on first scroll) -->
+  <svg class="pixel-svg" aria-hidden="true">
+    <defs>
+      <filter id="pixelate" x="0" y="0">
+        <feFlood x="1" y="1" width="1" height="1" />
+        <feComposite id="px-comp" width="8" height="8" />
+        <feTile result="a" />
+        <feComposite in="SourceGraphic" in2="a" operator="in" />
+        <feMorphology id="px-morph" operator="dilate" radius="4" />
+      </filter>
+    </defs>
+  </svg>
+</head>
+<body>
+  <!-- custom brick cursor -->
+  <div class="brick-cursor" id="cursor" aria-hidden="true"></div>
+
+  <!-- scroll progress -->
+  <div class="progress" id="progress"><span></span></div>
+
+  <!-- floating LEGO bricks background -->
+  <canvas id="confetti" aria-hidden="true"></canvas>
+
+  <div id="app">
+    <!-- NAV -->
+    <header class="nav glass">
+      <a class="brand" href="#top">
+        <span class="stud-dot"></span>
+        BRICK<span class="brand-accent">VERSE</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#play" class="navbtn"><span>Площадка</span></a>
+        <a href="#sets" class="navbtn"><span>Наборы</span></a>
+        <a href="#build" class="navbtn"><span>Сборка</span></a>
+        <a href="#collect" class="navbtn"><span>Коллекция</span></a>
+      </nav>
+      <a href="#play" class="cta-pill">Играть ▶</a>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="hero-grid">
+        <div class="hero-copy reveal">
+          <div class="kicker glass">🧱 интерактивный мир из кубиков</div>
+          <h1 class="title">
+            <span class="title-line">BRICK</span>
+            <span class="title-line title-accent">VERSE</span>
+          </h1>
+          <p class="lead">Собери, прокатись и собирай. Машинка слушается твоего курсора,
+            а золотой человечек ждёт тебя на пьедестале. Скролль вниз — будет весело.</p>
+          <div class="hero-actions">
+            <a href="#play" class="btn-brick btn-red">На площадку</a>
+            <a href="#sets" class="btn-brick btn-blue">Смотреть наборы</a>
+          </div>
+          <div class="brick-row" aria-hidden="true">
+            <i class="mini-brick c-red"></i><i class="mini-brick c-yellow"></i>
+            <i class="mini-brick c-blue"></i><i class="mini-brick c-green"></i>
+            <i class="mini-brick c-orange"></i>
+          </div>
+        </div>
+
+        <!-- Mr Gold minifig podium -->
+        <div class="hero-figure reveal">
+          <div class="figure-glow"></div>
+          <canvas id="minifig"></canvas>
+          <div class="figure-base glass">
+            <strong>MR. GOLD</strong>
+            <span>редкая минифигурка · 1 из 5000</span>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-hint">скролль вниз <span>▼</span></div>
+    </section>
+
+    <!-- PLAYGROUND: car follows cursor -->
+    <section class="play" id="play">
+      <div class="section-head reveal">
+        <h2 class="h2">Площадка <span class="chip">драйв</span></h2>
+        <p class="sub">Двигай мышкой — машинка едет за курсором по студовой плите.
+          На телефоне она едет туда, куда ты скроллишь. Тапни/кликни — бип-бип! 🚗</p>
+      </div>
+      <div class="stage reveal">
+        <canvas id="playground"></canvas>
+        <div class="stage-hint glass" id="stageHint">двигай курсор 🖱️</div>
+      </div>
+    </section>
+
+    <!-- SETS: modular blocky cards -->
+    <section class="sets" id="sets">
+      <div class="section-head reveal">
+        <h2 class="h2">Наборы <span class="chip chip-blue">модульно</span></h2>
+        <p class="sub">Кликабельные модульные блоки. Каждый — как отдельный кирпичик коллекции.</p>
+      </div>
+      <div class="cards">
+        <article class="card glass zoomable c-top-red reveal">
+          <div class="card-studs"><i></i><i></i><i></i><i></i></div>
+          <div class="emoji">🏎️</div>
+          <h3>Speed Racer</h3>
+          <p>Гоночный болид из 312 деталей. Реальная подвеска и съёмные колёса.</p>
+          <span class="tag">312 деталей</span>
+        </article>
+        <article class="card glass zoomable c-top-blue reveal">
+          <div class="card-studs"><i></i><i></i><i></i><i></i></div>
+          <div class="emoji">🏰</div>
+          <h3>Castle Quest</h3>
+          <p>Замок с рыцарями, драконом и подъёмным мостом. Часы приключений.</p>
+          <span class="tag">980 деталей</span>
+        </article>
+        <article class="card glass zoomable c-top-yellow reveal">
+          <div class="card-studs"><i></i><i></i><i></i><i></i></div>
+          <div class="emoji">🚀</div>
+          <h3>Moon Base</h3>
+          <p>Космическая станция со светящимися элементами и луноходом.</p>
+          <span class="tag">640 деталей</span>
+        </article>
+        <article class="card glass zoomable c-top-green reveal">
+          <div class="card-studs"><i></i><i></i><i></i><i></i></div>
+          <div class="emoji">🦖</div>
+          <h3>Dino Island</h3>
+          <p>Остров динозавров с вулканом и исследовательской базой.</p>
+          <span class="tag">724 детали</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- BUILD: zoom story -->
+    <section class="build" id="build">
+      <div class="build-inner zoomable-strong reveal">
+        <div class="build-text">
+          <h2 class="h2">Собирай <span class="chip chip-green">шаг за шагом</span></h2>
+          <p class="sub">Прокручивай — и сцена приближается. Каждый кирпичик встаёт на своё место.
+            Никаких ошибок, только чистое удовольствие от сборки.</p>
+          <ul class="steps">
+            <li><b>1</b> Выбери набор и открой инструкцию</li>
+            <li><b>2</b> Сортируй детали по цвету</li>
+            <li><b>3</b> Соединяй блок за блоком</li>
+            <li><b>4</b> Покажи всем свою постройку ✨</li>
+          </ul>
+        </div>
+        <div class="build-stack" aria-hidden="true">
+          <i class="stack-brick c-red"></i>
+          <i class="stack-brick c-orange"></i>
+          <i class="stack-brick c-yellow"></i>
+          <i class="stack-brick c-green"></i>
+          <i class="stack-brick c-blue"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- COLLECT -->
+    <section class="collect" id="collect">
+      <div class="section-head reveal">
+        <h2 class="h2">Коллекция <span class="chip chip-purple">для коллекционеров</span></h2>
+        <p class="sub">Редкие минифигурки и лимитированные серии. Mr. Gold — жемчужина набора.</p>
+      </div>
+      <div class="collect-grid">
+        <div class="rare glass reveal">
+          <div class="rare-badge">★ редкость</div>
+          <div class="big-emoji">🥇</div>
+          <h3>Mr. Gold</h3>
+          <p>Хромированный золотой человечек. Спрятан в 1 из 5000 пакетиков серии 10.</p>
+        </div>
+        <div class="rare glass reveal">
+          <div class="rare-badge">★ редкость</div>
+          <div class="big-emoji">🤖</div>
+          <h3>Mr. Robot</h3>
+          <p>Светящийся в темноте робот с подвижными руками.</p>
+        </div>
+        <div class="rare glass reveal">
+          <div class="rare-badge">★ редкость</div>
+          <div class="big-emoji">👽</div>
+          <h3>Mr. Alien</h3>
+          <p>Прозрачно-зелёный пришелец с бластером из 4 деталей.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer glass">
+      <div class="foot-brand"><span class="stud-dot"></span> BRICK<span class="brand-accent">VERSE</span></div>
+      <p>Сделано из кубиков и хорошего настроения 🧱 · фан-проект, не связан с LEGO Group</p>
+      <div class="brick-row" aria-hidden="true">
+        <i class="mini-brick c-red"></i><i class="mini-brick c-yellow"></i>
+        <i class="mini-brick c-blue"></i><i class="mini-brick c-green"></i>
+      </div>
+    </footer>
+  </div>
+
+  <!-- libraries (all bundled locally → works fully offline from file://) -->
+  <script src="vendor/three.min.js"></script>
+  <script src="vendor/GLTFLoader.js"></script>
+  <script src="vendor/gsap.min.js"></script>
+  <script src="vendor/ScrollTrigger.min.js"></script>
+  <script src="models.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
